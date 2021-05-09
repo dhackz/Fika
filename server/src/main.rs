@@ -1,9 +1,7 @@
 use std::net::{UdpSocket, SocketAddr};
 
 fn main() {
-    let socket = UdpSocket::bind("localhost:8080").expect("Failed to connect");
-    let mut server = FikaServer::new(socket);
-
+    let mut server = FikaServer::new();
     server.start().expect("reee");
 }
 
@@ -13,7 +11,8 @@ struct FikaServer {
 }
 
 impl FikaServer {
-    pub fn new(socket: UdpSocket) -> FikaServer  {
+    pub fn new() -> FikaServer  {
+        let socket = UdpSocket::bind("localhost:8080").expect("Failed to connect");
         FikaServer { socket, connections: Vec::new() }
     }
 
